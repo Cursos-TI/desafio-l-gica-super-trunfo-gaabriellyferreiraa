@@ -1,0 +1,87 @@
+#include <stdio.h>
+
+int main() {
+
+    // ===== CARTAS =====
+    char pais1[50] = "Brasil";
+    int populacao1 = 214000000;
+    float area1 = 8516000.0;
+    float pib1 = 1800000.0;
+    int pontos1 = 50;
+
+    char pais2[50] = "Argentina";
+    int populacao2 = 46000000;
+    float area2 = 2780000.0;
+    float pib2 = 600000.0;
+    int pontos2 = 30;
+
+    float densidade1 = populacao1 / area1;
+    float densidade2 = populacao2 / area2;
+
+    int op1, op2;
+
+    float valor1_carta1, valor1_carta2;
+    float valor2_carta1, valor2_carta2;
+
+    // ===== MENU 1 =====
+    printf("Escolha o PRIMEIRO atributo:\n");
+    printf("1 - População\n2 - Área\n3 - PIB\n4 - Pontos Turísticos\n5 - Densidade\n");
+    scanf("%d", &op1);
+
+    // ===== MENU 2 =====
+    printf("\nEscolha o SEGUNDO atributo (diferente do primeiro):\n");
+    printf("1 - População\n2 - Área\n3 - PIB\n4 - Pontos Turísticos\n5 - Densidade\n");
+    scanf("%d", &op2);
+
+    if (op1 == op2) {
+        printf("Erro: não pode escolher o mesmo atributo!\n");
+        return 0;
+    }
+
+    // ===== FUNÇÃO PARA PEGAR VALORES =====
+    switch(op1) {
+        case 1: valor1_carta1 = populacao1; valor1_carta2 = populacao2; break;
+        case 2: valor1_carta1 = area1; valor1_carta2 = area2; break;
+        case 3: valor1_carta1 = pib1; valor1_carta2 = pib2; break;
+        case 4: valor1_carta1 = pontos1; valor1_carta2 = pontos2; break;
+        case 5: valor1_carta1 = densidade1; valor1_carta2 = densidade2; break;
+        default: printf("Opção inválida!\n"); return 0;
+    }
+
+    switch(op2) {
+        case 1: valor2_carta1 = populacao1; valor2_carta2 = populacao2; break;
+        case 2: valor2_carta1 = area1; valor2_carta2 = area2; break;
+        case 3: valor2_carta1 = pib1; valor2_carta2 = pib2; break;
+        case 4: valor2_carta1 = pontos1; valor2_carta2 = pontos2; break;
+        case 5: valor2_carta1 = densidade1; valor2_carta2 = densidade2; break;
+        default: printf("Opção inválida!\n"); return 0;
+    }
+
+    // ===== COMPARAÇÃO (ternário) =====
+    float resultado1 = (op1 == 5) 
+        ? (valor1_carta1 < valor1_carta2 ? 1 : (valor1_carta1 > valor1_carta2 ? 2 : 0))
+        : (valor1_carta1 > valor1_carta2 ? 1 : (valor1_carta1 < valor1_carta2 ? 2 : 0));
+
+    float resultado2 = (op2 == 5) 
+        ? (valor2_carta1 < valor2_carta2 ? 1 : (valor2_carta1 > valor2_carta2 ? 2 : 0))
+        : (valor2_carta1 > valor2_carta2 ? 1 : (valor2_carta1 < valor2_carta2 ? 2 : 0));
+
+    // ===== SOMA =====
+    float soma1 = valor1_carta1 + valor2_carta1;
+    float soma2 = valor1_carta2 + valor2_carta2;
+
+    // ===== RESULTADO FINAL =====
+    printf("\n===== RESULTADO FINAL =====\n");
+    printf("%s soma: %.2f\n", pais1, soma1);
+    printf("%s soma: %.2f\n", pais2, soma2);
+
+    if (soma1 > soma2) {
+        printf("Vencedor: %s\n", pais1);
+    } else if (soma2 > soma1) {
+        printf("Vencedor: %s\n", pais2);
+    } else {
+        printf("Empate!\n");
+    }
+
+    return 0;
+}
